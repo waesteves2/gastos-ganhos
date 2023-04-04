@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Controle de Gastos e Ganhos</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: center;
+			padding: 8px;
+			border: 1px solid #ddd;
+		}
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+		tr:nth-child(even){background-color: #f2f2f2}
+	</style>
+</head>
+<body>
+	<h1>Controle de Gastos e Ganhos</h1>
+	<h2>Gastos</h2>
+	<form>
+		<label for="gasto">Gasto:</label>
+		<input type="text" id="gasto" name="gasto"><br><br>
+		<label for="valorGasto">Valor:</label>
+		<input type="number" id="valorGasto" name="valorGasto"><br><br>
+		<input type="button" value="Adicionar" onclick="adicionarGasto()">
+	</form>
+	<br>
+	<table>
+		<tr>
+			<th>Gasto</th>
+			<th>Valor</th>
+		</tr>
+		<tbody id="tabelaGastos">
+		</tbody>
+		<tr>
+			<td><b>Total de Gastos:</b></td>
+			<td id="totalGastos"></td>
+		</tr>
+	</table>
+	<h2>Ganhos</h2>
+	<form>
+		<label for="ganho">Ganho:</label>
+		<input type="text" id="ganho" name="ganho"><br><br>
+		<label for="valorGanho">Valor:</label>
+		<input type="number" id="valorGanho" name="valorGanho"><br><br>
+		<input type="button" value="Adicionar" onclick="adicionarGanho()">
+	</form>
+	<br>
+	<table>
+		<tr>
+			<th>Ganho</th>
+			<th>Valor</th>
+		</tr>
+		<tbody id="tabelaGanhos">
+		</tbody>
+		<tr>
+			<td><b>Total de Ganhos:</b></td>
+			<td id="totalGanhos"></td>
+		</tr>
+	</table>
+	<br>
+	<h2>Saldo</h2>
+	<p>Seu saldo atual é de: <b id="saldo"></b></p>
+	<script>
+		var gastos = [];
+		var totalGastos = 0;
+		var ganhos = [];
+		var totalGanhos = 0;
+		function adicionarGasto() {
+			var gasto = document.getElementById("gasto").value;
+			var valor = parseInt(document.getElementById("valorGasto").value);
+			gastos.push({gasto: gasto, valor: valor});
+			totalGastos += valor;
+			document.getElementById("gasto").value = "";
+			document.getElementById("valorGasto").value = "";
+			document.getElementById("totalGastos").innerHTML = totalGastos;
+			var tabela = document.getElementById("tabelaGastos");
+			var row = tabela.insertRow(-1);
+            var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell1.innerHTML = gasto;
+			cell2.innerHTML = valor;
+			if (totalGastos >= 80) {
+				alert("Cuidado! Você já está próximo de atingir seu limite de gastos.");
+			}
+			atualizarSaldo();
+		}
+		function adicionarGanho() {
+			var ganho = document.getElementById("ganho").value;
+			var valor = parseInt(document.getElementById("valorGanho").value);
+			ganhos.push({ganho: ganho, valor: valor});
+			totalGanhos += valor;
+			document.getElementById("ganho").value = "";
+			document.getElementById("valorGanho").value = "";
+			document.getElementById("totalGanhos").innerHTML = totalGanhos;
+			var tabela = document.getElementById("tabelaGanhos");
+			var row = tabela.insertRow(-1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell1.innerHTML = ganho;
+			cell2.innerHTML = valor;
+			atualizarSaldo();
+		}
+		function atualizarSaldo() {
+			var saldo = totalGanhos - totalGastos;
+			document.getElementById("saldo").innerHTML = saldo;
+		}
+	</script>
+</body>
+</html>
+
