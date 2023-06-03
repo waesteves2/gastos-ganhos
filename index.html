@@ -1,118 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-	<title>Controle de Gastos e Ganhos</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-		th, td {
-			text-align: center;
-			padding: 8px;
-			border: 1px solid #ddd;
-		}
-		th {
-			background-color: #4CAF50;
-			color: white;
-		}
-		tr:nth-child(even){background-color: #f2f2f2}
-	</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gastos e Ganhos</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .total {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-	<h1>Controle de Gastos e Ganhos</h1>
-	<h2>Gastos</h2>
-	<form>
-		<label for="gasto">Gasto:</label>
-		<input type="text" id="gasto" name="gasto"><br><br>
-		<label for="valorGasto">Valor:</label>
-		<input type="number" id="valorGasto" name="valorGasto"><br><br>
-		<input type="button" value="Adicionar" onclick="adicionarGasto()">
-	</form>
-	<br>
-	<table>
-		<tr>
-			<th>Gasto</th>
-			<th>Valor</th>
-		</tr>
-		<tbody id="tabelaGastos">
-		</tbody>
-		<tr>
-			<td><b>Total de Gastos:</b></td>
-			<td id="totalGastos"></td>
-		</tr>
-	</table>
-	<h2>Ganhos</h2>
-	<form>
-		<label for="ganho">Ganho:</label>
-		<input type="text" id="ganho" name="ganho"><br><br>
-		<label for="valorGanho">Valor:</label>
-		<input type="number" id="valorGanho" name="valorGanho"><br><br>
-		<input type="button" value="Adicionar" onclick="adicionarGanho()">
-	</form>
-	<br>
-	<table>
-		<tr>
-			<th>Ganho</th>
-			<th>Valor</th>
-		</tr>
-		<tbody id="tabelaGanhos">
-		</tbody>
-		<tr>
-			<td><b>Total de Ganhos:</b></td>
-			<td id="totalGanhos"></td>
-		</tr>
-	</table>
-	<br>
-	<h2>Saldo</h2>
-	<p>Seu saldo atual é de: <b id="saldo"></b></p>
-	<script>
-		var gastos = [];
-		var totalGastos = 0;
-		var ganhos = [];
-		var totalGanhos = 0;
-		function adicionarGasto() {
-			var gasto = document.getElementById("gasto").value;
-			var valor = parseInt(document.getElementById("valorGasto").value);
-			gastos.push({gasto: gasto, valor: valor});
-			totalGastos += valor;
-			document.getElementById("gasto").value = "";
-			document.getElementById("valorGasto").value = "";
-			document.getElementById("totalGastos").innerHTML = totalGastos;
-			var tabela = document.getElementById("tabelaGastos");
-			var row = tabela.insertRow(-1);
-            var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			cell1.innerHTML = gasto;
-			cell2.innerHTML = valor;
-			if (totalGastos >= 2500) {
-				alert("Cuidado! Você já está próximo de atingir seu limite de gastos.");
-			}
-			atualizarSaldo();
-		}
-		function adicionarGanho() {
-			var ganho = document.getElementById("ganho").value;
-			var valor = parseInt(document.getElementById("valorGanho").value);
-			ganhos.push({ganho: ganho, valor: valor});
-			totalGanhos += valor;
-			document.getElementById("ganho").value = "";
-			document.getElementById("valorGanho").value = "";
-			document.getElementById("totalGanhos").innerHTML = totalGanhos;
-			var tabela = document.getElementById("tabelaGanhos");
-			var row = tabela.insertRow(-1);
-			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			cell1.innerHTML = ganho;
-			cell2.innerHTML = valor;
-			atualizarSaldo();
-		}
-		function atualizarSaldo() {
-			var saldo = totalGanhos - totalGastos;
-			document.getElementById("saldo").innerHTML = saldo;
-		}
-	</script>
+  <h1>Gastos e Ganhos</h1>
+  
+  <h2>Beatriz</h2>
+  <label for="nome_pessoa1">Nome do Gasto:</label>
+  <input type="text" id="nome_pessoa1">
+  <label for="valor_pessoa1">Valor:</label>
+  <input type="text" id="valor_pessoa1">
+  <button onclick="adicionarGasto('pessoa1')">Adicionar Gasto</button>
+  <br>
+  <h3>Gastos:</h3>
+  <table id="tabelaGastos_pessoa1">
+    <tr>
+      <th>Nome</th>
+      <th>Valor</th>
+    </tr>
+  </table>
+  <p>Total de Gastos: R$ <span id="totalGastos_pessoa1" class="total">0.00</span></p>
+  
+  <label for="nome_ganho_pessoa1">Nome do Ganho:</label>
+  <input type="text" id="nome_ganho_pessoa1">
+  <label for="valor_ganho_pessoa1">Valor:</label>
+  <input type="text" id="valor_ganho_pessoa1">
+  <button onclick="adicionarGanho('pessoa1')">Adicionar Ganho</button>
+  <br>
+  <h3>Ganhos:</h3>
+  <table id="tabelaGanhos_pessoa1">
+    <tr>
+      <th>Nome</th>
+      <th>Valor</th>
+    </tr>
+  </table>
+  <p>Total de Ganhos: R$ <span id="totalGanhos_pessoa1" class="total">0.00</span></p>
+  
+  <p>Saldo: R$ <span id="saldo_pessoa1" class="total">0.00</span></p>
+
+  <hr>
+  <h2>Rafael</h2>
+  <label for="nome_pessoa2">Nome do Gasto:</label>
+  <input type="text" id="nome_pessoa2">
+  <label for="valor_pessoa2">Valor:</label>
+  <input type="text" id="valor_pessoa2">
+  <button onclick="adicionarGasto('pessoa2')">Adicionar Gasto</button>
+  <br>
+  <h3>Gastos:</h3>
+  <table id="tabelaGastos_pessoa2">
+    <tr>
+      <th>Nome</th>
+      <th>Valor</th>
+    </tr>
+  </table>
+  <p>Total de Gastos: R$ <span id="totalGastos_pessoa2" class="total">0.00</span></p>
+  
+  <label for="nome_ganho_pessoa2">Nome do Ganho:</label>
+  <input type="text" id="nome_ganho_pessoa2">
+  <label for="valor_ganho_pessoa2">Valor:</label>
+  <input type="text" id="valor_ganho_pessoa2">
+  <button onclick="adicionarGanho('pessoa2')">Adicionar Ganho</button>
+  <br>
+  <h3>Ganhos:</h3>
+  <table id="tabelaGanhos_pessoa2">
+    <tr>
+      <th>Nome</th>
+      <th>Valor</th>
+    </tr>
+  </table>
+  <p>Total de Ganhos: R$ <span id="totalGanhos_pessoa2" class="total">0.00</span></p>
+  
+  <p>Saldo: R$ <span id="saldo_pessoa2" class="total">0.00</span></p>
+  
+  <h2>Total Geral</h2>
+  <p>Total de Gastos: R$ <span id="totalGastos_geral" class="total">0.00</span></p>
+  <p>Total de Ganhos: R$ <span id="totalGanhos_geral" class="total">0.00</span></p>
+  <p>Saldo: R$ <span id="saldo_geral" class="total">0.00</span></p>
+  
+  <button onclick="limparDados()">Limpar Dados</button>
+  
+  <script>
+    function adicionarGasto(pessoa) {
+      var nome = document.getElementById("nome_" + pessoa).value;
+      var valor = parseFloat(document.getElementById("valor_" + pessoa).value);
+      
+      var gastos = JSON.parse(localStorage.getItem("gastos")) || {};
+      gastos[pessoa] = gastos[pessoa] || [];
+      gastos[pessoa].push({ nome: nome, valor: valor });
+      localStorage.setItem("gastos", JSON.stringify(gastos));
+      
+      carregarDadosSalvos();
+    }
+
+    function adicionarGanho(pessoa) {
+      var nome = document.getElementById("nome_ganho_" + pessoa).value;
+      var valor = parseFloat(document.getElementById("valor_ganho_" + pessoa).value);
+      
+      var ganhos = JSON.parse(localStorage.getItem("ganhos")) || {};
+      ganhos[pessoa] = ganhos[pessoa] || [];
+      ganhos[pessoa].push({ nome: nome, valor: valor });
+      localStorage.setItem("ganhos", JSON.stringify(ganhos));
+      
+      carregarDadosSalvos();
+    }
+
+    function carregarDadosSalvos() {
+      var gastos = JSON.parse(localStorage.getItem("gastos")) || {};
+      preencherTabela("tabelaGastos_pessoa1", gastos.pessoa1);
+      preencherTabela("tabelaGastos_pessoa2", gastos.pessoa2);
+
+      var ganhos = JSON.parse(localStorage.getItem("ganhos")) || {};
+      preencherTabela("tabelaGanhos_pessoa1", ganhos.pessoa1);
+      preencherTabela("tabelaGanhos_pessoa2", ganhos.pessoa2);
+
+      calcularTotais(gastos, ganhos);
+    }
+
+    function preencherTabela(tableId, data) {
+      var table = document.getElementById(tableId);
+      table.innerHTML = "";
+      if (data) {
+        for (var i = 0; i < data.length; i++) {
+          var row = table.insertRow();
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = data[i].nome;
+          cell2.innerHTML = data[i].valor.toFixed(2);
+        }
+      }
+    }
+
+    function calcularTotais(gastos, ganhos) {
+      var totalGastos_pessoa1 = calcularTotal(gastos.pessoa1);
+      var totalGastos_pessoa2 = calcularTotal(gastos.pessoa2);
+      var totalGanhos_pessoa1 = calcularTotal(ganhos.pessoa1);
+      var totalGanhos_pessoa2 = calcularTotal(ganhos.pessoa2);
+
+      document.getElementById("totalGastos_pessoa1").innerHTML = totalGastos_pessoa1.toFixed(2);
+      document.getElementById("totalGastos_pessoa2").innerHTML = totalGastos_pessoa2.toFixed(2);
+      document.getElementById("totalGanhos_pessoa1").innerHTML = totalGanhos_pessoa1.toFixed(2);
+      document.getElementById("totalGanhos_pessoa2").innerHTML = totalGanhos_pessoa2.toFixed(2);
+
+      var saldo_pessoa1 = totalGanhos_pessoa1 - totalGastos_pessoa1;
+      var saldo_pessoa2 = totalGanhos_pessoa2 - totalGastos_pessoa2;
+
+      document.getElementById("saldo_pessoa1").innerHTML = saldo_pessoa1.toFixed(2);
+      document.getElementById("saldo_pessoa2").innerHTML = saldo_pessoa2.toFixed(2);
+
+      var totalGastos_geral = totalGastos_pessoa1 + totalGastos_pessoa2;
+      var totalGanhos_geral = totalGanhos_pessoa1 + totalGanhos_pessoa2;
+      var saldo_geral = saldo_pessoa1 + saldo_pessoa2;
+
+      document.getElementById("totalGastos_geral").innerHTML = totalGastos_geral.toFixed(2);
+      document.getElementById("totalGanhos_geral").innerHTML = totalGanhos_geral.toFixed(2);
+      document.getElementById("saldo_geral").innerHTML = saldo_geral.toFixed(2);
+}
+function calcularTotal(data) {
+  var total = 0;
+  if (data) {
+    for (var i = 0; i < data.length; i++) {
+      total += data[i].valor;
+    }
+  }
+  return total;
+}
+
+function limparCampos(pessoa) {
+  document.getElementById("nome_" + pessoa).value = "";
+  document.getElementById("valor_" + pessoa).value = "";
+  document.getElementById("nome_ganho_" + pessoa).value = "";
+  document.getElementById("valor_ganho_" + pessoa).value = "";
+}
+
+function limparDados() {
+  localStorage.removeItem("gastos");
+  localStorage.removeItem("ganhos");
+  carregarDadosSalvos();
+}
+
+window.addEventListener("load", carregarDadosSalvos);
+
+</script>
 </body>
 </html>
-
